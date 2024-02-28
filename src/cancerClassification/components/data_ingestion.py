@@ -26,7 +26,7 @@ class DataIngestion:
             logger.info(f"Downloading data from {dataset_url} into file {zip_download_dir}")
 
             file_id = dataset_url.split("/")[-2]
-            prefix = 'https://drive.google.com/drive/folders'
+            prefix = 'https://drive.google.com/uc?/export=download&id='
             gdown.download(prefix+file_id,zip_download_dir)
 
             logger.info(f"Downloaded data from {dataset_url} into file {zip_download_dir}")
@@ -35,13 +35,13 @@ class DataIngestion:
             raise e
         
     
-    # def extract_zip_file(self):
-    #     """
-    #     zip_file_path: str
-    #     Extracts the zip file into the data directory
-    #     Function returns None
-    #     """
-    #     unzip_path = self.config.unzip_dir
-    #     os.makedirs(unzip_path, exist_ok=True)
-    #     with zipfile.ZipFile(self.config.local_data_file, 'r') as zip_ref:
-    #         zip_ref.extractall(unzip_path)
+    def extract_zip_file(self):
+        """
+        zip_file_path: str
+        Extracts the zip file into the data directory
+        Function returns None
+        """
+        unzip_path = self.config.unzip_dir
+        os.makedirs(unzip_path, exist_ok=True)
+        with zipfile.ZipFile(self.config.local_data_file, 'r') as zip_ref:
+            zip_ref.extractall(unzip_path)
