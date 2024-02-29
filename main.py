@@ -6,9 +6,7 @@ from src.cancerClassification.pipeline.stage_04_model_evaluation import Evaluati
 import os
 
 
-os.environ["MLFLOW_TRACKING_URI"]="https://dagshub.com/Sohail1173/End-to-End-with-mlflow-dvc.mlflow "
-os.environ["MLFLOW_TRACKING_USERNAME"]="Sohail1173"
-os.environ["MLFLOW_TRACKING_PASSWORD"]="456ac5abdd3e02452a4de39d5f900553bf0c93e8"
+
 
 STAGE_NAME="Data  Ingestion Stage"
 
