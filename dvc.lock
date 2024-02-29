@@ -1,0 +1,117 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python 
+      C:\Users\91808\Downloads\End-to-End-with-mlflow-dvc\src\cancerClassification\pipeline\stage_01_data_ingestion.py
+    deps:
+    - path: config/config.yaml
+      hash: md5
+      md5: 4ad0e42e3434edf2190520323a809330
+      size: 600
+    - path: src/cancerClassification/pipeline/stage_01_data_ingestion.py
+      hash: md5
+      md5: 7f390e821a7fe839ff47cbc307013845
+      size: 940
+    outs:
+    - path: artifacts/data_ingestion/chest-ctscan
+      hash: md5
+      md5: 2fa437fd250a508d8b09ba58505fb532.dir
+      size: 51812189
+      nfiles: 351
+  prepare_base_model:
+    cmd: python 
+      C:\Users\91808\Downloads\End-to-End-with-mlflow-dvc\src\cancerClassification\pipeline\stage_02_prepare_base_model.py
+    deps:
+    - path: config/config.yaml
+      hash: md5
+      md5: 4ad0e42e3434edf2190520323a809330
+      size: 600
+    - path: src/cancerClassification/pipeline/stage_02_prepare_base_model.py
+      hash: md5
+      md5: 3bbc2ac24e30b97ebcbfa3249851b634
+      size: 984
+    params:
+      params.yaml:
+        CLASSES: 2
+        IMAGE_SIZE:
+        - 224
+        - 224
+        - 3
+        INCLUDE_TOP: false
+        LEARNING_RATE: 0.02
+        WEIGHTS: imagenet
+    outs:
+    - path: artifacts/prepare_base_model
+      hash: md5
+      md5: ff9a096a3c91d10edfe39f23163f74e5.dir
+      size: 118054560
+      nfiles: 2
+  training:
+    cmd: python 
+      C:\Users\91808\Downloads\End-to-End-with-mlflow-dvc\src\cancerClassification\pipeline\stage_03_model_trainer.py
+    deps:
+    - path: artifacts/data_ingestion/chest-ctscan
+      hash: md5
+      md5: 2fa437fd250a508d8b09ba58505fb532.dir
+      size: 51812189
+      nfiles: 351
+    - path: artifacts/prepare_base_model
+      hash: md5
+      md5: ff9a096a3c91d10edfe39f23163f74e5.dir
+      size: 118054560
+      nfiles: 2
+    - path: config/config.yaml
+      hash: md5
+      md5: 4ad0e42e3434edf2190520323a809330
+      size: 600
+    - path: src/cancerClassification/pipeline/stage_03_model_trainer.py
+      hash: md5
+      md5: 4e3bf555c0e9f40834cb362ba1c5574b
+      size: 910
+    params:
+      params.yaml:
+        AUGMENTATION: true
+        BATCH_SIZE: 16
+        EPOCHS: 3
+        IMAGE_SIZE:
+        - 224
+        - 224
+        - 3
+    outs:
+    - path: artifacts/training/model.h5
+      hash: md5
+      md5: 37118c95a398be0d971439a17436ec4f
+      size: 59337520
+  evaluation:
+    cmd: python 
+      C:\Users\91808\Downloads\End-to-End-with-mlflow-dvc\src\cancerClassification\pipeline\stage_04_model_evaluation.py
+    deps:
+    - path: artifacts/data_ingestion/chest-ctscan
+      hash: md5
+      md5: 2fa437fd250a508d8b09ba58505fb532.dir
+      size: 51812189
+      nfiles: 351
+    - path: artifacts/training/model.h5
+      hash: md5
+      md5: 37118c95a398be0d971439a17436ec4f
+      size: 59337520
+    - path: config/config.yaml
+      hash: md5
+      md5: 4ad0e42e3434edf2190520323a809330
+      size: 600
+    - path: src/cancerClassification/pipeline/stage_04_model_evaluation.py
+      hash: md5
+      md5: e4a74b0ffcf24cbf995a9837ddbc3644
+      size: 894
+    params:
+      params.yaml:
+        BATCH_SIZE: 16
+        IMAGE_SIZE:
+        - 224
+        - 224
+        - 3
+    outs:
+    - path: scores.json
+      hash: md5
+      md5: 269647f5cd03c9d40393390bb5c8e907
+      size: 71
