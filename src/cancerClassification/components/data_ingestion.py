@@ -1,9 +1,9 @@
 import os
 import zipfile
 import gdown
-from src.cancerClassification import logger
-from src.cancerClassification.utils.common import get_size
-from src.cancerClassification.entity.config_entity import DataIngestionConfig
+from cancerClassification import logger
+from cancerClassification.utils.common import get_size
+from cancerClassification.entity.config_entity import DataIngestionConfig
 
 
 

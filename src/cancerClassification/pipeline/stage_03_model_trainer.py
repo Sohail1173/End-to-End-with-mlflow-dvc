@@ -1,6 +1,6 @@
-from src.cancerClassification.config.configuration import ConfigurationManager
-from src.cancerClassification.components.model_trainer import Training
-from src.cancerClassification import logger
+from cancerClassification.config.configuration import ConfigurationManager
+from cancerClassification.components.model_trainer import Training
+from cancerClassification import logger
 
 
 

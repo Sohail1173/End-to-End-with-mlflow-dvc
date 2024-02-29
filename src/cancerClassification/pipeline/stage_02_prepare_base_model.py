@@ -1,6 +1,6 @@
-from src.cancerClassification.config.configuration import ConfigurationManager
-from src.cancerClassification.components.prepare_base_model import PrepareBaseModel
-from src.cancerClassification import logger
+from cancerClassification.config.configuration import ConfigurationManager
+from cancerClassification.components.prepare_base_model import PrepareBaseModel
+from cancerClassification import logger
 
 
 

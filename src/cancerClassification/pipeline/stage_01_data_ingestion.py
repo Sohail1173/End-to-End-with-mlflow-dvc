@@ -1,6 +1,6 @@
-from src.cancerClassification.config.configuration import ConfigurationManager
-from src.cancerClassification.components.data_ingestion import DataIngestion
-from src.cancerClassification import logger
+from cancerClassification.config.configuration import ConfigurationManager
+from cancerClassification.components.data_ingestion import DataIngestion
+from cancerClassification import logger
 
 
 
